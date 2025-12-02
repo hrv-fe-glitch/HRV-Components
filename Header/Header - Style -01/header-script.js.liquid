@@ -1,0 +1,240 @@
+AgriMarket.Header = {
+  init: function(){
+    var that = this;
+    that.AgriMarket_mainMenuMobile();
+		that.AgriMarket_clickIconsHeader();
+    that.AgriMarket_scrollFixedHeader();
+    that.AgriMarket_menuSidebar();
+    that.AgriMarket_translate_mobile();
+  },
+  AgriMarket_menuSidebar: function(){
+		$('.agrimarket-plus-nClick1').click(function(e){
+			e.preventDefault();
+			$(this).parents('.agrimarket-level0').toggleClass('agrimarket-opened');
+			$(this).parents('.agrimarket-level0').children('ul').slideToggle(200);
+		});
+		$('.agrimarket-plus-nClick2').click(function(e){
+			e.preventDefault();
+			$(this).parents('.agrimarket-level1').toggleClass('agrimarket-opened');
+			$(this).parents('.agrimarket-level1').children('ul').slideToggle(200);
+		});
+		jQuery('.agrimarket-sidebox-title .agrimarket-htitle').click(function(){
+			$(this).parents('.agrimarket-group-sidebox').toggleClass('is-open').find('.agrimarket-sidebox-content-togged').slideToggle('medium');
+		}); 
+	},
+  AgriMarket_mainMenuMobile: function(){
+		$('.agrimarket-list-root li a').click(function(e){
+			if ($(this).find('i').length){
+				e.preventDefault();
+				var menu_child_id = $(this).parent().data('menu-root');
+				$('.agrimarket-list-root').addClass('agrimarket-mm-subopened');
+				$('#' + menu_child_id).addClass('agrimarket-mm-opened');
+			} 
+		})
+		$('.agrimarket-list-child li:first-child a').click(function(){
+			$(this).parents('.agrimarket-list-child').removeClass('agrimarket-mm-opened');
+			$('.list-root').removeClass('agrimarket-mm-subopened');
+		})
+		$('.agrimarket-list-child li.agrimarket-level-2 a').click(function(e){
+			if ($(this).find('i').length){
+				e.preventDefault();
+				var menu_sub_id = $(this).parent().data('menu-root');
+				$('li.agrimarket-level-2').addClass('agrimarket-mm-subopened');
+				$('#' + menu_sub_id).addClass('agrimarket-mm-sub');
+			} 
+		})
+		$('agrimarket-sub-child li:first-child a').click(function(){
+			$(this).parents('.agrimarket-sub-child').removeClass('agrimarket-mm-sub');
+			$('.agrimarket-list-child').removeClass('agrimarket-mm-subopened');
+		})
+		$(document).on("click",".agrimarket-sub-child li.agrimarket-level-3 a",function(e){
+			if ($(this).find('i').length){
+				e.preventDefault();
+				var menu_subnav_id = $(this).parent().data('menu-root');
+				$('li.agrimarket-level-3').addClass('agrimarket-mm-open-3');
+				$('#' +  menu_subnav_id).addClass('agrimarket-mm-sub-3');
+			} 
+		});
+		$(document).on("click",".agrimarket-sub-child-3 li:first-child a",function(e){
+			$(this).parents('.agrimarket-sub-child-3').removeClass('agrimarket-mm-sub-3');
+			$('.agrimarket-sub-child').removeClass('agrimarket-mm-open-3');
+		});
+	},
+  AgriMarket_closeSidebarMain: function(){
+		$('.agrimarket-sidebar-overlay, .agrimarket-btn-sitenav-close').on('click', function(e){
+			$('body').removeClass('agrimarket-locked-scroll');
+			$(this).parents('.agrimarket-sidebar-main').removeClass('agrimarket-is-show-right');
+			$(this).parents('.agrimarket-sidebar-main').removeClass('agrimarket-is-show-left');
+			$('.agrimarket-sidebar-main .agrimarket-sitenav-wrapper').removeClass('agrimarket-show');
+			jQuery('body').removeClass('agrimarket-mainBody-mbcart').removeClass('agrimarket-body-showcart');
+		})
+	},
+	AgriMarket_clickIconsHeader: function(){
+		$('.agrimarket-header-action_clicked').click(function(e){
+			e.preventDefault();		
+			if($(this).parents('.agrimarket-header-action-item').hasClass('agrimarket-js-action-show')){
+				$('body').removeClass('agrimarket-locked-scroll');
+				$(this).parents('.agrimarket-header-action-item').removeClass('agrimarket-js-action-show');
+				if($(window).width() < 992){
+					if ($(this).parents('.agrimarket-header-action-item').hasClass('agrimarket-header-action_cart')) {
+						$('.agrimarket-siteCart-mobile__overlay').removeClass('agrimarket-show-cart');
+						$('body').removeClass('agrimarket-locked-scroll').removeClass('agrimarket-body-showcart');
+					}
+				}
+			}
+			else{
+				$('body').removeClass("agrimarket-locked-scroll-menu");
+				$('.agrimarket-header-action-item').removeClass('agrimarket-js-action-show');
+				$('body').addClass('agrimarket-locked-scroll');
+				$(this).parents('.agrimarket-header-action-item').addClass('agrimarket-js-action-show');
+				if($(window).width() < 992){
+					if ($(this).parents('.agrimarket-header-action-item').hasClass('agrimarket-header-action_cart'))  {
+
+						$('.agrimarket-siteCart-mobile').addClass('agrimarket-show-cart');
+						$('body').removeClass('agrimarket-locked-scroll').addClass('agrimarket-body-showcart');
+					}
+				}
+			}		
+		});	
+		$('.agrimarket-siteCart-mobile__header').click(function() {
+			if ($(this).parents('.agrimarket-siteCart-mobile').hasClass('agrimarket-show-cart')) {
+				$(this).parents('.agrimarket-siteCart-mobile').removeClass('agrimarket-show-cart');
+				$('body').removeClass('agrimarket-locked-scroll').removeClass('agrimarket-body-showcart');
+				$('.agrimarket-header-action-item.agrimarket-header-action_cart').removeClass('agrimarket-js-action-show');
+			} else {	
+				$('body').addClass('agrimarket-body-showcart');
+				$(this).parents('.agrimarket-siteCart-mobile').addClass('agrimarket-show-cart');
+
+			}
+		});
+		$('.agrimarket-siteCart-mobile__overlay').on('click', function(e){
+			$(this).parents('.agrimarket-siteCart-mobile').removeClass('agrimarket-show-cart');
+			$('body').removeClass('agrimarket-locked-scroll').removeClass('agrimarket-body-showcart');
+			$('.agrimarket-header-action-item.agrimarket-header-action_cart').removeClass('agrimarket-js-action-show');
+		})
+		$('body').on('click', '#agrimarket-sitenav-overlay', function(e){
+			$('body').removeClass('agrimarket-locked-scroll');
+			$('.agrimarket-header-action-item').removeClass('agrimarket-js-action-show');
+		});
+		$('body').on('click', '#agrimarket-sitenav-overlay,.agrimarket-sitenav-content .agrimarket-btnclose', function(e){
+			$('body').removeClass('agrimarket-locked-scroll').removeClass("agrimarket-locked-scroll-menu");
+			$('.agrimarket-header-action-item').removeClass('agrimarket-js-action-show');
+		});
+		$('.agrimarket-activeCartChecked').click(function() {
+			$('body').addClass('agrimarket-locked-scroll');
+			$('.agrimarket-header-action-item').removeClass('agrimarket-js-action-show');
+			$('.agrimarket-sidebar-main').addClass('agrimarket-is-show-right');
+			$('.agrimarket-sidebar-main .agrimarket-sitenav-cart').addClass('agrimarket-show');
+		});
+		$('.agrimarket-activeMenuChecked').click(function() {
+			if($('.agrimarket-sidebar-main .agrimarket-sitenav-wrapper.agrimarket-sitenav-menu').length == 0){
+				$.ajax({
+					url: '/index?view=header-load-menu',
+					success:function(data){
+						$('.agrimarket-sidebar-main').append(data);
+						setTimeout(function() {
+							if($('.agrimarket-addThis_listSharing').hasClass('agrimarket-active')){
+								$('.agrimarket-addThis_listSharing').removeClass('agrimarket-active');
+								$('.agrimarket-addThis_listSharing').fadeOut(150);	
+							}
+							$('body').addClass('agrimarket-locked-scroll');
+							$('.agrimarket-header-action-item').removeClass('agrimarket-js-action-show');
+							$('.agrimarket-sidebar-main').addClass('agrimarket-is-show-left');
+							$('.agrimarket-sidebar-main .agrimarket-sitenav-menu').addClass('agrimarket-show');
+						},100);
+						AgriMarket.Header.AgriMarket_menuSidebar();
+						AgriMarket.Header.AgriMarket_closeSidebarMain();
+					}
+				});
+			}else{
+				if($('.agrimarket-addThis_listSharing').hasClass('agrimarket-active')){
+					$('.agrimarket-addThis_listSharing').removeClass('agrimarket-active');
+					$('.agrimarket-addThis_listSharing').fadeOut(150);	
+				}
+				$('body').addClass('agrimarket-locked-scroll');
+				$('.agrimarket-header-action-item').removeClass('agrimarket-js-action-show');
+				$('.agrimarket-sidebar-main').addClass('agrimarket-is-show-left');
+				$('.agrimarket-sidebar-main .agrimarket-sitenav-menu').addClass('agrimarket-show');
+			}
+		});
+		$('.agrimarket-sidebar-overlay, .agrimarket-btn-sitenav-close').on('click', function(e){
+			$('body').removeClass('locked-scroll').removeClass('agrimarket-body-showcart');
+			$(this).parents('.agrimarket-sidebar-main').removeClass('agrimarket-is-show-right');
+			$(this).parents('.agrimarket-sidebar-main').removeClass('agrimarket-is-show-left');
+			$('.agrimarket-sidebar-main .agrimarket-sitenav-wrapper').removeClass('agrimarket-show');
+		})
+	},	
+  AgriMarket_scrollFixedHeader: function(){
+		var $parentHeader = $('.agrimarket-mainHeader--height');
+		var parentHeight = $parentHeader.find('.agrimarket-mainHeader').outerHeight();
+		var $header = $('.agrimarket-mainHeader');
+		var offset_sticky_header = $header.outerHeight() + 100;
+		var offset_sticky_down = 0;
+		$parentHeader.css('min-height', parentHeight );	
+		var resizeTimer = false,
+				resizeWindow = $(window).prop("innerWidth");
+		$(window).on("resize", function() {
+			if (resizeTimer) {clearTimeout(resizeTimer)	}
+			resizeTimer = setTimeout(function() {
+				var newWidth = $(window).prop("innerWidth");
+				if (resizeWindow != newWidth) {
+					$header.removeClass('agrimarket-hSticky-up').removeClass('agrimarket-hSticky-nav').removeClass('agrimarket-hSticky');
+					$parentHeader.css('agrimarket-min-height', '' );	
+					resizeTimer = setTimeout(function() {
+						parentHeight = $parentHeader.find('.agrimarket-mainHeader').outerHeight();
+						$parentHeader.css('agrimarket-min-height', parentHeight );	
+					}, 50);
+					resizeWindow = newWidth;
+				}
+			}, 200)
+		});
+		setTimeout(function() {
+			$parentHeader.css('min-height', '' );		
+			parentHeight = $parentHeader.find('.agrimarket-mainHeader').outerHeight();
+			$parentHeader.css('min-height', parentHeight );	
+			jQuery(window).scroll(function() {	
+				/* scroll header */
+				if(jQuery(window).scrollTop() > offset_sticky_header && jQuery(window).scrollTop() > offset_sticky_down) {		
+					if(jQuery(window).width() > 991){		
+						$('body').removeClass('agrimarket-locked-scroll');
+						$('.agrimarket-header-action-item').removeClass('agrimarket-js-action-show');
+					}		
+					$header.addClass('agrimarket-hSticky');	
+					if(jQuery(window).scrollTop() > offset_sticky_header + 150){
+						$header.removeClass('agrimarket-hSticky-up').addClass('agrimarket-hSticky-nav');	
+						$('body').removeClass('agrimarket-scroll-body-up');
+					};
+				} 
+				else {
+					if(jQuery(window).scrollTop() > offset_sticky_header && (jQuery(window).scrollTop() + 450) + jQuery(window).height()  < $(document).height()) {
+						$header.addClass('agrimarket-hSticky-up');	
+						$('body').addClass('agrimarket-scroll-body-up');
+					}	
+				}
+				if (jQuery(window).scrollTop() <= offset_sticky_down && jQuery(window).scrollTop()   <= offset_sticky_header ) {
+					$header.removeClass('agrimarket-hSticky-up').removeClass('agrimarket-hSticky-nav');
+					$('body').removeClass('agrimarket-scroll-body-up');
+					if(jQuery(window).scrollTop()  <= offset_sticky_header - 100){
+						$header.removeClass('agrimarket-hSticky');
+					}
+				}
+				offset_sticky_down = jQuery(window).scrollTop();
+			});	
+		}, 300)
+	},
+  AgriMarket_translate_mobile: () => {
+    if ($(window).width() < 992) {
+      $(".agrimarket-topbar-content-item .translate-wrapper").remove();
+      $(".translate-wrapper").on("click",function(e){
+        e.preventDefault();
+        $(this).toggleClass('active');
+      })
+    }
+  }
+};
+(function() {
+  AgriMarket.Header.init();
+  //console.log("Script Header AM - Loaded")
+})();
+
+

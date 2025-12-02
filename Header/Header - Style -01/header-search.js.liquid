@@ -1,0 +1,101 @@
+AgriMarket.Header.Search = {
+  init: function(){
+    var that = this;
+    that.searchAutoHeader();
+  },
+  searchAutoHeader: function(){
+		$('.agrimarket-ultimate-search').submit(function(e) {
+			e.preventDefault();
+			var q = $(this).find('input[name=q]').val();
+			if(q.indexOf('script') > -1 || q.indexOf('>') > -1){
+				alert('Từ khóa của bạn có chứa mã độc hại! Vui lòng nhập lại từ khóa khác');
+				$(this).find('input[name=q]').val('');
+			}
+			else{
+				var q_follow = 'product';
+				var query = encodeURIComponent('(title:product contains ' + q + ')');
+				if( !q ) {
+					window.location = '/search?type='+ q_follow +'&q=*';
+					return;
+				}	
+				else {
+					window.location = '/search?type=' + q_follow +'&q=filter=' + query;
+					return;
+				}
+			}
+		});
+		var $input = $('.agrimarket-ultimate-search input[type="text"]');
+		$input.bind('keyup change paste propertychange', function() {
+			var key = $(this).val(),
+					$parent = $(this).parents('.agrimarket-wpo-wrapper-search'),
+					$results = $(this).parents('.agrimarket-wpo-wrapper-search').find('.agrimarket-smart-search-wrapper');
+
+			if(key.indexOf('script') > -1 || key.indexOf('>') > -1){
+				alert('Từ khóa của bạn có chứa mã độc hại! Vui lòng nhập lại từ khóa khác');
+				$(this).val('');
+				$('.agrimarket-ultimate-search input[type="text"]').val('');
+			}
+			else{
+				if(key.length > 0 ){
+					$(this).attr('data-history', key);
+					$('.agrimarket-ultimate-search input[type="text"]').val($(this).val());
+					var q_follow = 'product',
+							str = '';
+					/*	str = '/search?q=filter=(title:product contains ' + key + ')&view=header-ultimate-product';*/
+					str = '/search?type=product&q=' + key + '&view=header-ultimate-product';
+					$.ajax({
+						url: str,
+						type: 'GET',
+						async: true,
+						success: function(data){
+							$results.find('.agrimarket-resultsContent').html(data);
+						}
+					})
+					if(!$('.agrimarket-header-action_search').hasClass('agrimarket-js-action-show')){
+						$('body').removeClass("agrimarket-locked-scroll");
+						$('.agrimarket-header-action-item').removeClass('agrimarket-js-action-show');
+					}
+					$(".agrimarket-ultimate-search").addClass("agrimarket-expanded");
+					$results.fadeIn();
+				}
+				else{
+					$('.agrimarket-ultimate-search input[type="text"]').val($(this).val());
+					$(".agrimarket-ultimate-search").removeClass("agrimarket-expanded");
+					$results.fadeOut();
+				}
+			}
+
+		})
+		$('body').click(function(evt) {
+			var target = evt.target;
+			if (target.id !== 'agrimarket-ajaxSearchResults' && target.id !== 'agrimarket-inputSearchAuto') {
+				$("#agrimarket-ajaxSearchResults").hide();
+			}
+			if (target.id !== 'agrimarket-ajaxSearchResults-mb' && target.id !== 'agrimarket-inputSearchAuto-mb') {
+				$("#agrimarket-ajaxSearchResults-mb").hide();
+			}
+			if (target.id !== 'agrimarket-ajaxSearchResults-3' && target.id !== 'agrimarket-inputSearchAuto-3') {
+				$("#agrimarket-ajaxSearchResults-3").hide();
+			}
+		});
+		$('body').on('click', '.agrimarket-ultimate-search input[type="text"]', function() {
+			if ($(this).is(":focus")) {
+				if ($(this).val() != '') {
+					$(".agrimarket-ajaxSearchResults").show();
+				}
+			} else {
+			}
+		})
+		$('body').on('click', '.agrimarket-ultimate-search .agrimarket-search-close', function(e){
+			e.preventDefault();
+			$(".agrimarket-ajaxSearchResults").hide();
+			$(".agrimarket-ultimate-search").removeClass("agrimarket-expanded");
+			$(".agrimarket-ultimate-search").find('input[name=q]').val('');
+		})
+	},
+};
+
+(function() {
+  AgriMarket.Header.Search.init();
+  //console.log("Function Search - Loaded");
+})();
