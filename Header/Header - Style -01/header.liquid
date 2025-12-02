@@ -1,0 +1,247 @@
+{%- include 'topbar' -%}
+<div class="" id="header-container">
+  <link rel="preload stylesheet" href="{{ 'header-style.scss.css' | asset_url }}" as="stylesheet">
+  <script fetchpriority="low" type="text/javascript" defer src="{{ 'header-script.js' | asset_url }}"></script>
+  <link rel="preload stylesheet" href="{{ 'header-search.scss.css' | asset_url }}" as="stylesheet">
+  <script fetchpriority="low" type="text/javascript" defer src="{{ 'header-search.js' | asset_url }}"></script>
+  <link rel="preload stylesheet" href="{{ 'header-minicart.scss.css' | asset_url }}" as="stylesheet">
+  <script fetchpriority="low" type="text/javascript" defer src="{{ 'header-minicart.js' | asset_url }}"></script>  
+  <div class="agrimarket-mainHeader--height">
+  	<header class="agrimarket-mainHeader  agrimarket-mainHeader_temp03  {% if template contains 'product' %} mainHeader-product {% endif %}" id="agrimarket-site-header">
+  		<div class="agrimarket-mainHeader-middle">
+  			<div class="container container-pd">
+  				<div class="agrimarket-flex-container-header">
+  					<div class="agrimarket-header-wrap-iconav agrimarket-header-wrap-action d-sm-block d-lg-none">
+  						<div class="agrimarket-header-action">
+  							<div class="agrimarket-header-action-item agrimarket-header-action_menu agrimarket-activeMenuChecked">							
+  								<div class="agrimarket-header-action_text">
+  									<a class="agrimarket-header-action__link" name="icon-menu-mobile" href="javascript:void(0)" aria-label="Menu" title="Menu">
+  										<span class="agrimarket-box-icon">								
+  											<span class="agrimarket-hamburger-menu"  aria-hidden="true">
+  												<span class="agrimarket-bar"></span>
+  											</span>
+  											<span class="agrimarket-box-icon--close">
+  												<svg  viewBox="0 0 19 19" role="presentation"><path d="M9.1923882 8.39339828l7.7781745-7.7781746 1.4142136 1.41421357-7.7781746 7.77817459 7.7781746 7.77817456L16.9705627 19l-7.7781745-7.7781746L1.41421356 19 0 17.5857864l7.7781746-7.77817456L0 2.02943725 1.41421356.61522369 9.1923882 8.39339828z"  fill-rule="evenodd"></path></svg>
+  											</span>											
+  										</span>	
+  									</a>
+  								</div>
+  							</div>
+  						</div>
+  					</div>
+  					<div class="agrimarket-header-wrap-logo">
+  						<div class="agrimarket-wrap-logo" itemscope="" itemtype="http://schema.org/Organization">
+  							{% if settings.use_logo %}
+  							{% if template == 'index' %}
+  							<a href="{{shop.url}}"  itemprop="url">
+  								<img itemprop="logo" src="{{ 'logo.png' | asset_url}}" alt="{{ shop.name }}" class="img-responsive logoimg lazyload"/>
+  							</a>			
+  							<h1 style="display:none"><a class="notranslate" href="{{shop.url}}" itemprop="url">{{ shop.name }}</a></h1>
+  							{% else %}
+  							<a href="{{shop.url}}"  itemprop="url">
+  								<img itemprop="logo" src="{{ 'logo.png' | asset_url}}" alt="{{ shop.name }}" class="img-responsive logoimg lazyload"/>
+  							</a>
+  							{% endif %}
+  							{% else %}
+  							{% if template == 'index' %}	<h1><a href="{{shop.url}}" class="notranslate" itemprop="url">{{ shop.name }}</a></h1>
+  							{% else %}	<a href="{{shop.url}}" itemprop="url" class="notranslate">{{ shop.name }}</a>{% endif %}
+  							{% endif %}
+  
+  						</div>
+  					</div>
+  					<div class="agrimarket-header-wrap-action">
+  						<div class="agrimarket-header-action">	
+  							<div class="agrimarket-header-action-item agrimarket-header-wrap-search d-none d-lg-block">
+  								<div class="agrimarket-header-search">
+  									<div class="agrimarket-search-box agrimarket-wpo-wrapper-search">
+  										<form action="/search" class="agrimarket-searchform-product agrimarket-searchform-categoris agrimarket-ultimate-search">
+  											<div class="agrimarket-wpo-search-inner">
+  												<input type="hidden" name="type" value="product" />
+  												<input required id="agrimarket-inputSearchAuto-3" class="agrimarket-input-search" name="q" maxlength="40" autocomplete="off"  type="text" size="20" placeholder="Tìm kiếm sản phẩm...">
+  											</div>
+  											<button type="submit" class="agrimarket-btn-search btn">
+  												<svg version="1.1" class="svg search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 27" style="enable-background:new 0 0 24 27;" xml:space="preserve"><path d="M10,2C4.5,2,0,6.5,0,12s4.5,10,10,10s10-4.5,10-10S15.5,2,10,2z M10,19c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S13.9,19,10,19z"></path><rect x="17" y="17" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -9.2844 19.5856)" width="4" height="8"></rect></svg>
+  											</button>
+  										</form>
+  										<div id="agrimarket-ajaxSearchResults-3" class="agrimarket-smart-search-wrapper agrimarket-ajaxSearchResults" style="display: none">
+  											<div class="agrimarket-resultsContent"></div>
+  										</div>
+  									</div>	
+  								</div>
+  							</div>
+  							<div class="agrimarket-header-action-item agrimarket-header-action_search">							
+  								<div class="agrimarket-header-action_text">
+  									<a class="agrimarket-header-action__link agrimarket-header-action_clicked"  href="javascript:void(0)" id="site-search-handle"  aria-label="Tìm kiếm" title="Tìm kiếm">
+  										<span class="agrimarket-box-icon">								
+  											<svg class="agrimarket-svg-ico-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 451 451" style="enable-background:new 0 0 451 451;" xml:space="preserve">
+  												<g>
+  													<path d="M447.05,428l-109.6-109.6c29.4-33.8,47.2-77.9,47.2-126.1C384.65,86.2,298.35,0,192.35,0C86.25,0,0.05,86.3,0.05,192.3   s86.3,192.3,192.3,192.3c48.2,0,92.3-17.8,126.1-47.2L428.05,447c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4   C452.25,441.8,452.25,433.2,447.05,428z M26.95,192.3c0-91.2,74.2-165.3,165.3-165.3c91.2,0,165.3,74.2,165.3,165.3   s-74.1,165.4-165.3,165.4C101.15,357.7,26.95,283.5,26.95,192.3z"></path>
+  												</g>
+  											</svg>
+  											<span class="agrimarket-box-icon--close">
+  												<svg  viewBox="0 0 19 19" role="presentation"><path d="M9.1923882 8.39339828l7.7781745-7.7781746 1.4142136 1.41421357-7.7781746 7.77817459 7.7781746 7.77817456L16.9705627 19l-7.7781745-7.7781746L1.41421356 19 0 17.5857864l7.7781746-7.77817456L0 2.02943725 1.41421356.61522369 9.1923882 8.39339828z"  fill-rule="evenodd"></path></svg>
+  											</span>											
+  										</span>	
+  									</a>
+  									<span class="agrimarket-box-triangle">
+  										<svg viewBox="0 0 20 9" role="presentation">
+  											<path d="M.47108938 9c.2694725-.26871321.57077721-.56867841.90388257-.89986354C3.12384116 6.36134886 5.74788116 3.76338565 9.2467995.30653888c.4145057-.4095171 1.0844277-.40860098 1.4977971.00205122L19.4935156 9H.47108938z" fill="#ffffff"></path>
+  										</svg>
+  									</span>
+  								</div>
+  								<div class="agrimarket-header-action_dropdown">
+  									
+  									<div class="agrimarket-header-dropdown_content">
+  										<div class="agrimarket-sitenav-content agrimarket-sitenav-search">
+  											<p class="agrimarket-boxtitle">Tìm kiếm</p>											
+  											<div class="agrimarket-search-box agrimarket-wpo-wrapper-search">
+  												<form action="/search" class="agrimarket-searchform agrimarket-searchform-categoris agrimarket-ultimate-search">
+  													<div class="agrimarket-wpo-search-inner">
+  														<input type="hidden" name="type" value="product" />
+  														<input required id="agrimarket-inputSearchAuto" class="agrimarket-input-search" name="q" maxlength="40" autocomplete="off"  type="text" size="20" placeholder="Tìm kiếm sản phẩm...">
+  													</div>
+  													<button type="submit" class="agrimarket-btn-search btn" id="agrimarket-search-header-btn">
+  														<svg version="1.1" class="svg search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 27" style="enable-background:new 0 0 24 27;" xml:space="preserve"><path d="M10,2C4.5,2,0,6.5,0,12s4.5,10,10,10s10-4.5,10-10S15.5,2,10,2z M10,19c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S13.9,19,10,19z"></path><rect x="17" y="17" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -9.2844 19.5856)" width="4" height="8"></rect></svg>
+  													</button>
+  												</form>
+  												<div id="agrimarket-ajaxSearchResults" class="agrimarket-smart-search-wrapper agrimarket-ajaxSearchResults" style="display: none">
+  													<div class="agrimarket-resultsContent"></div>
+  												</div>
+  											</div>
+  										</div>
+  									</div>
+  								</div>
+  							</div>
+  							{%- if settings.agrimarket_header_wishlist_show -%}
+  							<div class="agrimarket-header-action-item agrimarket-header-action_wishlist">							
+  								<div class="agrimarket-header-action_text">
+  									<a class="agrimarket-header-action__link" href="{{settings.agrimarket_header_wishlist_url}}" aria-label="Tài khoản" title="Tài khoản">
+  										<span class="agrimarket-box-icon">								
+  											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                          <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                        </svg>		
+                        <span class="agrimarket-wishlist-holder">
+                          <span class="js-wishlist-count ">{{ cart.item_count }}</span>
+                        </span>
+  										</span>
+                      
+  										<span class="agrimarket-box-text">
+  											<span class="agrimarket-txtbl"><span class="agrimarket-txt-overflow">{{settings.agrimarket_header_wishlist_title}}</span></span>
+  										</span>										
+  									</a>
+                  </div>
+  							</div>
+  							{%- endif -%}
+  							<div class="agrimarket-header-action-item agrimarket-header-action_account">							
+  								<div class="agrimarket-header-action_text">
+  									<a class="agrimarket-header-action__link" href="{% if customer'%}/account/login{%else%}/account{%endif%}" aria-label="Tài khoản" title="Tài khoản">
+  										<span class="agrimarket-box-icon">								
+  											<svg class="agrimarket-svg-ico-account" viewBox="0 0 1024 1024" >
+  												<path class="path1" d="M486.4 563.2c-155.275 0-281.6-126.325-281.6-281.6s126.325-281.6 281.6-281.6 281.6 126.325 281.6 281.6-126.325 281.6-281.6 281.6zM486.4 51.2c-127.043 0-230.4 103.357-230.4 230.4s103.357 230.4 230.4 230.4c127.042 0 230.4-103.357 230.4-230.4s-103.358-230.4-230.4-230.4z"></path>
+  												<path class="path2" d="M896 1024h-819.2c-42.347 0-76.8-34.451-76.8-76.8 0-3.485 0.712-86.285 62.72-168.96 36.094-48.126 85.514-86.36 146.883-113.634 74.957-33.314 168.085-50.206 276.797-50.206 108.71 0 201.838 16.893 276.797 50.206 61.37 27.275 110.789 65.507 146.883 113.634 62.008 82.675 62.72 165.475 62.72 168.96 0 42.349-34.451 76.8-76.8 76.8zM486.4 665.6c-178.52 0-310.267 48.789-381 141.093-53.011 69.174-54.195 139.904-54.2 140.61 0 14.013 11.485 25.498 25.6 25.498h819.2c14.115 0 25.6-11.485 25.6-25.6-0.006-0.603-1.189-71.333-54.198-140.507-70.734-92.304-202.483-141.093-381.002-141.093z"></path>
+  											</svg>										
+  										</span>
+  										<span class="agrimarket-box-text">
+  											{%- if customer -%}
+  											Chào bạn, 
+  											<span class="agrimarket-txtbl"><span class="agrimarket-txt-overflow"> {{customer.first_name}} {{customer.last_name}}</span> 
+                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" x="0" y="0" viewBox="0 0 128 128"><g><path d="m64 88c-1.023 0-2.047-.391-2.828-1.172l-40-40c-1.563-1.563-1.563-4.094 0-5.656s4.094-1.563 5.656 0l37.172 37.172 37.172-37.172c1.563-1.563 4.094-1.563 5.656 0s1.563 4.094 0 5.656l-40 40c-.781.781-1.805 1.172-2.828 1.172z"></path></g></svg>
+                        </span>
+  											{%- else -%}
+  											Tài khoản
+  											{%- endif -%}
+  										</span>										
+  									</a>
+                  </div>
+  							</div>
+                {%- if settings.agrimarket_shop_buying -%}
+  							<div class="agrimarket-header-action-item agrimarket-header-action_cart agrimarket-activeCartChecked {%unless checkcarticon %}show-mb{%endunless%}">							
+  								<div class="agrimarket-header-action_text">
+  									<a class="agrimarket-header-action__link {% unless template == 'cart' %} agrimarket-header-action_clicked {% endunless %}"  href="{% if template == 'cart' or settings.promotion_hrvapp_use%}/cart{%else%}javascript:void(0);{%endif%}" id="agrimarket-site-cart-handle"  aria-label="Giỏ hàng" title="Giỏ hàng">				
+  										<span class="agrimarket-box-icon">								
+  											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
+                          <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
+                        </svg>
+  											<span class="agrimarket-box-icon--close">
+  												<svg  viewBox="0 0 19 19" role="presentation"><path d="M9.1923882 8.39339828l7.7781745-7.7781746 1.4142136 1.41421357-7.7781746 7.77817459 7.7781746 7.77817456L16.9705627 19l-7.7781745-7.7781746L1.41421356 19 0 17.5857864l7.7781746-7.77817456L0 2.02943725 1.41421356.61522369 9.1923882 8.39339828z"  fill-rule="evenodd"></path></svg>
+  											</span>			
+  											<span class="agrimarket-count-holder">
+  												<span class="agrimarket-count">{{ cart.item_count }}</span>
+  											</span>		
+  										</span>	
+  										<span class="agrimarket-box-text">
+  											<span class="txtbl">Giỏ hàng</span>
+  										</span>							
+  									</a>
+  									<span class="agrimarket-box-triangle">
+  										<svg viewBox="0 0 20 9" role="presentation">
+  											<path d="M.47108938 9c.2694725-.26871321.57077721-.56867841.90388257-.89986354C3.12384116 6.36134886 5.74788116 3.76338565 9.2467995.30653888c.4145057-.4095171 1.0844277-.40860098 1.4977971.00205122L19.4935156 9H.47108938z" fill="#ffffff"></path>
+  										</svg>
+  									</span>
+  								</div>
+  							</div>
+                  {%- endif -%}
+  						</div>
+  					</div>
+  				</div>
+  			</div>
+  		</div>
+  		<div class="agrimarket-header-menu-desktop {% if template contains 'index' %} agrimarket-header-pd {% endif %} d-none d-lg-block">
+  			<div class="container container-pd">
+  				<div class="agrimarket-header-navbar-menu">
+  					<div class="agrimarket-header-wrap-logo agrimarket-wrap-logo-sticky">
+  						<div class="agrimarket-wrap-logo">
+  							{% if settings.use_logo %}						
+  							<a href="{{shop.url}}"  itemprop="url">
+  								<img itemprop="logo" src="{{ 'logo.png' | asset_url}}" alt="{{ shop.name }}" class="img-responsive logoimg lazyload"/>
+  							</a>
+  							{% else %}			
+  							<a href="{{shop.url}}" itemprop="url">{{ shop.name }}</a>
+  							{% endif %}
+  						</div>
+  					</div>
+  					<div class="agrimarket-header-wrap-menu">
+  						{%- include 'header-menu' -%}
+  					</div>
+            {%- if settings.agrimarket_header_button1_show or settings.agrimarket_header_button2_show -%}
+            <div class="agrimarket-header-wrap-rightnav">
+              {%- if settings.header_button1_show -%}
+              <a class="agrimarket-header-wrap-btn" href="{{settings.agrimarket_header_button1_url}}">
+                {{settings.agrimarket_header_button1_title}}
+              </a>
+              {%- endif -%}
+              {%- if settings.agrimarket_header_button1_show -%}
+              <a class="agrimarket-header-wrap-btn agrimarket-header-wrap-btn-primary" href="{{settings.header_button2_url}}">
+                {{settings.agrimarket_header_button2_title}}
+                {%- if settings.agrimarket_header_button2_label != blank -%}
+                  <span>{{settings.agrimarket_header_button2_label}}</span>
+                {%- endif -%}
+              </a>
+              {%- endif -%}
+            </div>
+            {%- endif -%}
+  				</div>
+  			</div>
+  		</div>
+  		<div class="agrimarket-header-search-mobile">
+  			<div class=" agrimarket-search-box agrimarket-wpo-wrapper-search">
+  				<form action="/search" class="agrimarket-searchform-mobile agrimarket-searchform-categoris agrimarket-ultimate-search">
+  					<div class="agrimarket-wpo-search-inner">
+  						<input type="hidden" name="type" value="product" />
+  						<input required id="inputSearchAuto-mb" class="agrimarket-input-search" name="q" maxlength="40" autocomplete="off"  type="text" size="20" placeholder="Tìm kiếm sản phẩm...">
+  					</div>
+  					<button type="submit" class="agrimarket-btn-search btn" id="agrimarket-search-header-btn-mb">
+  						<span class="agrimarket-search-icon"><svg version="1.1" class="svg search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 27" style="enable-background:new 0 0 24 27;" xml:space="preserve"><path d="M10,2C4.5,2,0,6.5,0,12s4.5,10,10,10s10-4.5,10-10S15.5,2,10,2z M10,19c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7S13.9,19,10,19z"></path><rect x="17" y="17" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -9.2844 19.5856)" width="4" height="8"></rect></svg></span>	
+  						<span class="agrimarket-search-close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></span>	
+  					</button>
+  				</form>
+  				<div id="agrimarket-ajaxSearchResults-mb" class="agrimarket-smart-search-wrapper agrimarket-ajaxSearchResults" style="display: none">
+  					<div class="agrimarket-resultsContent"></div>
+  				</div>
+  			</div>
+  		</div>
+  	</header>
+  </div>
+  {%- include 'header-sidebar-main' -%}
+  {%- include 'header-modal-coupon-header' -%}
+</div>
