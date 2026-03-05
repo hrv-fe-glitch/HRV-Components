@@ -1,0 +1,38 @@
+{% if settings.rst_ft_newsletter_show %}
+ <link rel="preload stylesheet" href="{{ 'rst_footer-newsletter.css' | asset_url }}" as="style">  
+  <script fetchpriority="low" type="text/javascript" async src="{{ 'rst_footer-newsletter.js' | asset_url }}"></script>    
+<div class="rst_footer-newsletter rst_ft-item-middle rst_newsletter-block"
+  style="
+  --bg-btn-submit:{{ settings.rst_ft_newsletter_btn_bg}};
+  --clr-btn-submit:{{ settings.rst_ft_newsletter_btn_clr}};
+  --bg-btn-submit-hover:{{ settings.rst_ft_newsletter_btn_bg_hv}};
+  --clr-btn-submit-hover:{{ settings.rst_ft_newsletter_btn_clr_hv}};"
+  >
+  <div class="newsletter-title">
+    {% if settings.rst_ft_newsletter_title != blank %}<h4 class="rst_ft-title-col">{{settings.rst_ft_newsletter_title}}</h4>{% endif %}
+  </div>				
+  <div class="newsletter-content newsletter-form">
+    {% capture form_Footer %}
+    {% form 'customer' %} 
+    {% if form.posted_successfully? %}<p id="newsletter-success" class="d-none popup-form-success success">Cám ơn bạn đã đăng ký email theo dõi!</p>{% endif %}
+    <div class="form-group input-group">
+      <input type="hidden" id="newsletter-tags" name="contact[tags]" value="Đăng kí nhận tin" />     
+      <input required type="email" name="contact[email]" class="form-control newsletter-input" id="newsletter-email" 
+             placeholder="Nhập email của bạn" aria-label="Email Address">
+      <div class="input-group-btn">
+        {% assign title_btn_ft = settings.rst_ft_newsletter_btntitle | default: 'Đăng ký' %}
+        {% include 'button-style' with type_btn: 'submit', title_btn:  title_btn_ft , id_btn: 'rst_btn_submit', class_btn: 'cta-submitform newsletter-btn' %}
+      </div>
+    </div>
+    <div class="sitebox-recaptcha d-none hidden hide" >
+      This site is protected by reCAPTCHA and the Google
+      <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">Privacy Policy</a> 
+      and <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer">Terms of Service</a> apply.
+    </div>	
+    {% endform %}
+    {% endcapture %}
+    {{ form_Footer | replace: 'script', 'noscript' }}
+    <p class="newsletter-error"></p>
+  </div> 
+</div>
+{% endif %}			

@@ -1,0 +1,106 @@
+<link rel="preload stylesheet" href="{{ 'rst_footer.css' | asset_url }}" as="style">
+
+{%- if settings.toolbar_bottom_selected == 'toolbar_style_1' or settings.toolbar_bottom_selected == 'toolbar_style_2' -%}
+{%- assign classtoolbar = 'has-toolbar' -%}
+{%-endif-%}
+
+<footer class="mainFooter mainFooter_bg  {{classtoolbar }}"
+  style="--bg-footer: {{ settings.knk_ft_bg }};
+         --clr-title: {{ settings.knk_ft_title_clr }};
+         --clr-stitle: {{ settings.knk_ft_txt_clr }};">
+  <div class="container">
+    {% include 'rst_footer-top' %}
+    <div class="knk_footer-middle">
+      <div class="knk_footer-middle-flex">
+        
+        {% if settings.footer_linklist1_show or settings.footer_linklist2_show %}
+<link rel="preload stylesheet" href="{{ 'knk_footer-middle-menu.css' | asset_url }}" as="style">  
+{% if settings.footer_linklist1_show %}
+<div class="knk_footer-middle-menu knk_ft-item-middle knk_ft-menu-block">
+  {% if settings.footer_linklist1_title != blank %}<h4 class="knk_ft-title-col knk_ft-title-menu">{{settings.footer_linklist1_title}}</h4>{% endif %}
+  <div class="content-footer block-collapse">				
+    <ul class="knk_footerNav-link">
+      {%for link in linklists[settings.footer_linklist1_menu].links%}
+      <li class="item">
+        <a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a>
+      </li>
+      {%endfor%}	
+    </ul>		
+  </div>
+</div>
+{% endif %}
+{% if settings.footer_linklist2_show %}
+<div class="knk_footer-middle-menu knk_ft-item-middle knk_ft-menu-block">
+  {% if settings.footer_linklist2_title != blank %}<h4 class="knk_ft-title-col knk_ft-title-menu">{{settings.footer_linklist2_title}}</h4>{% endif %}
+  <div class="content-footer block-collapse">				
+    <ul class="knk_footerNav-link">
+      {%for link in linklists[settings.footer_linklist2_menu].links%}
+      <li class="item">
+        <a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a>
+      </li>
+      {%endfor%}	
+    </ul>			
+  </div>
+</div>
+{% endif %}
+{% endif %}
+
+
+        {% if settings.knk_footer_about_show %}
+<link rel="preload stylesheet" href="{{ 'knk_footer-middle-info.css' | asset_url }}" as="style">  
+<div class="knk_footer-middle-info knk_ft-item-middle knk_info-block"
+  style="--clr-hotline:{{ settings.knk_footer-phone-clr}};">
+  {% if settings.knk_footer_about_title != blank %}<h4 class="title-footer">{{settings.knk_footer_about_title}}</h4>{% endif %}
+  <div class="content-footer block-collapse">				
+    <div class="knk_address-footer">
+      {%- if settings.knk_footer-phone != empty -%}<div class="contact-item contact-item-hotline"> {{settings.knk_footer-phone }}</div>{%- endif -%}
+      {%- if settings.footer-email != empty -%}<div class="contact-item">{{settings.knk_footer-email}}</div>{%- endif -%}
+      {%- if settings.knk_footer-address != empty -%}
+      <div class="contact-item">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.2941 14.0227C18.0104 13.8669 17.6542 13.9705 17.4984 14.2541C17.3426 14.5378 17.4462 14.894 17.7298 15.0498C18.4278 15.4332 18.8281 15.8583 18.8281 16.2161C18.8281 16.6536 18.2082 17.3317 16.4682 17.9229C14.7493 18.5069 12.4521 18.8285 10 18.8285C7.54785 18.8285 5.2507 18.5069 3.53176 17.9229C1.7918 17.3318 1.17188 16.6536 1.17188 16.2161C1.17188 15.8583 1.57219 15.4332 2.27016 15.0498C2.55379 14.894 2.65738 14.5377 2.50156 14.2541C2.34574 13.9705 1.98961 13.8669 1.7059 14.0227C0.927695 14.4502 0 15.1778 0 16.2161C0 17.0119 0.547344 18.1466 3.15477 19.0325C4.99195 19.6566 7.42297 20.0004 10 20.0004C12.577 20.0004 15.008 19.6566 16.8452 19.0325C19.4527 18.1466 20 17.0119 20 16.2161C20 15.1778 19.0723 14.4502 18.2941 14.0227Z" fill="{{ settings.knk_footer-phone-clr}}"/>
+            <path d="M5.57635 17.0755C6.7658 17.4115 8.33686 17.5966 10.0001 17.5966C11.6633 17.5966 13.2344 17.4115 14.4238 17.0755C15.879 16.6644 16.6169 16.0693 16.6169 15.3069C16.6169 14.5445 15.879 13.9495 14.4238 13.5384C14.1008 13.4471 13.7495 13.3671 13.376 13.2988C13.1731 13.6493 12.9606 14.01 12.7383 14.3812C13.1518 14.4432 13.5399 14.5193 13.8924 14.6091C14.9634 14.8818 15.3546 15.1889 15.4351 15.307C15.3546 15.425 14.9634 15.7321 13.8925 16.0048C12.8788 16.263 11.5747 16.4103 10.2012 16.4234C10.1346 16.4284 10.0676 16.4311 10.0001 16.4311C9.93256 16.4311 9.86557 16.4284 9.799 16.4234C8.42545 16.4103 7.12131 16.263 6.10768 16.0048C5.03674 15.7321 4.64553 15.425 4.5651 15.307C4.64553 15.1889 5.03678 14.8818 6.10771 14.6091C6.46021 14.5193 6.84838 14.4432 7.26186 14.3812C7.03963 14.0101 6.82709 13.6493 6.62424 13.2988C6.25072 13.3671 5.89936 13.4471 5.57635 13.5384C4.12115 13.9495 3.3833 14.5445 3.3833 15.3069C3.3833 16.0693 4.12115 16.6644 5.57635 17.0755Z" fill="{{ settings.knk_footer-phone-clr}}"/>
+            <path d="M10.0001 15.2591C10.5217 15.2591 10.9955 14.9934 11.2676 14.5482C13.1742 11.4288 15.447 7.31758 15.447 5.44684C15.447 2.44344 13.0035 0 10.0001 0C6.99666 0 4.55322 2.44344 4.55322 5.44684C4.55322 7.31758 6.826 11.4288 8.7326 14.5482C9.00471 14.9934 9.47854 15.2591 10.0001 15.2591ZM7.81076 5.07285C7.81076 3.8657 8.79291 2.88359 10.0001 2.88359C11.2073 2.88359 12.1894 3.8657 12.1894 5.07285C12.1894 6.28004 11.2073 7.26215 10.0001 7.26215C8.79291 7.26215 7.81076 6.28008 7.81076 5.07285Z" fill="{{ settings.knk_footer-phone-clr}}"/>
+        </svg>
+        {{settings.knk_footer-address}}
+      </div>
+      {%- endif -%}
+      
+    </div>
+    {% if settings.footer_logobct_show %}
+    <div class="logo-footer">
+      <a href="{{settings.footer_logobct_link}}" target="_blank" rel="noreferrer">
+        <img loading="lazy" decoding="async"  class="lazyload" data-src="{{'footer_logobct_img.png' | asset_url  }}" 
+             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+             alt="{{settings.footer_logobct_alt}}" >
+      </a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}				
+  	
+      </div>
+    </div>
+    {% if settings.knk_ft_copyright_show and settings.knk_ft_copyright != blank %}
+<div class="copyright_content">
+<style>
+.copyright_content {
+  padding: 39px 0 0px;
+  border-top: 1px solid var(--border_shop);
+  text-align: center;
+}
+.copyright_content a { color: currentColor; }
+@media (max-width: 1199px) {
+  .copyright_content {
+    margin-top: 40px;
+  }
+}
+</style>
+  {{ settings.knk_ft_copyright  }}<a target="_blank" href="https://www.haravan.com"  rel="noreferrer"> Powered by Haravan</a>
+</div>
+{% endif %}
+  </div>
+</footer>
+
+
