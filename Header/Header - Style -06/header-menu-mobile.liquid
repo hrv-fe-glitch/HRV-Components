@@ -1,0 +1,86 @@
+<div class="parkrise-sitenav-wrapper parkrise-sitenav-left parkrise-sitenav-menu">
+	<div class="parkrise-sitenav-inner">
+		<div class="parkrise-sitenav-header">
+      {%- if settings.parkrise_shop_google_translate -%}
+        <div class="parkrise-menu-translate theme-translate-mobile-container">
+          {%- include 'theme_google_translate' -%}
+        </div>
+      {%- else -%}
+			<p class="parkrise-sitenav-header__title">Danh mục</p>
+        {%- endif -%}
+			<a name="button-close" class="parkrise-sitenav-header__btn parkrise-btn-sitenav-close">
+				<svg viewBox="0 0 19 19" role="presentation"><path d="M9.1923882 8.39339828l7.7781745-7.7781746 1.4142136 1.41421357-7.7781746 7.77817459 7.7781746 7.77817456L16.9705627 19l-7.7781745-7.7781746L1.41421356 19 0 17.5857864l7.7781746-7.77817456L0 2.02943725 1.41421356.61522369 9.1923882 8.39339828z" fill-rule="evenodd"></path></svg>
+			</a>
+      <div class="w-100 mt-2">
+        <a class="parkrise-header-action__link"  href="{%- if customer -%}/account{%else%}/account/login{%endif%}" aria-label="Tài khoản" title="Tài khoản">
+          {%- if customer -%}
+            Hi, <strong>{{customer.first_name}} {{customer.last_name}}</strong>
+          {%else%}
+            Tài khoản
+            {%endif%}
+        </a>
+      </div>
+		</div>
+		<div class="parkrise-sitenav-content">
+			<div class="parkrise-menu-mobile--wrap">
+				<ul class="parkrise-menuList-links">
+					{% for link in linklists[settings.parkrise_mainmenu_link].links limit: 10 %}
+					{% if linklists[link.handle].links == empty %}				
+					<li class="{% if link.active %} active {% endif %}"><a href="{{link.url}}" title="{{link.title}}"><span>{{link.title}}</span></a></li>
+					{% else %}
+					<li class="parkrise-has-submenu parkrise-level0 {% if link.active %} active {% endif %}">
+						<a href="{{ link.url }}" title="{{link.title}}">{{ link.title }} <span class="parkrise-icon-plus-submenu parkrise-plus-nClick1"></span></a>
+						<ul class="parkrise-submenu-links">
+							{% for link2 in linklists[link.handle].links %}
+							{% if linklists[link2.handle].links == empty %}
+							<li><a href="{{ link2.url }}" title="{{link2.title}}">{{ link2.title }}</a></li>
+							{% else %}
+							<li class="parkrise-has-submenu parkrise-level1">
+								<a href="{{ link2.url }}">{{ link2.title }}  <span class="parkrise-icon-plus-submenu parkrise-plus-nClick2"></span></a>
+								<ul class="parkrise-submenu-links" >
+									{% for link3 in linklists[link2.handle].links %}						
+									<li class=""><a href="{{ link3.url }}" title="{{link3.title}}" >{{ link3.title }}</a></li>
+									{% endfor %}
+								</ul>
+							</li>
+							{% endif %}
+							{% endfor %}
+						</ul>
+					</li>
+					{% endif %}
+					{% endfor%}
+				</ul>	
+			</div>
+		</div>
+		<div class="parkrise-sitenav-footer">
+			<div class="parkrise-mobile-menu__section parkrise-mobile-menu__section--loose">
+				<p class="parkrise-mobile-menu__section-title">Bạn cần hỗ trợ?</p>
+				{%- if settings.parkrise_hottline_mb != '' -%}
+				<div class="parkrise-mobile-menu__help-wrapper">
+					<svg class="icon icon--bi-phone" viewBox="0 0 24 24" role="presentation">
+						<g stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="square">
+							<path d="M17 15l-3 3-8-8 3-3-5-5-3 3c0 9.941 8.059 18 18 18l3-3-5-5z" stroke="{{settings.parkrise_shop_text_color}}"></path>
+							<path d="M14 1c4.971 0 9 4.029 9 9m-9-5c2.761 0 5 2.239 5 5" stroke="{{settings.parkrise_shop_text_color}}"></path>
+						</g>
+					</svg>
+					<a class="parkrise-cta-clicktocall" href="tel:{{ settings.parkrise_hottline_mb | replace: '.', ''| replace: ' ', ''}}" rel="noopener">{{ settings.parkrise_hottline_mb }}</a>
+				</div>
+				{%- endif -%}
+				{%- if settings.parkrise_email_mb != '' -%}
+				<div class="parkrise-mobile-menu__help-wrapper">
+					<svg class="icon icon--bi-email" viewBox="0 0 22 22" role="presentation">
+						<g fill="none" fill-rule="evenodd">
+							<path stroke="{{settings.parkrise_shop_text_color}}" d="M.916667 10.08333367l3.66666667-2.65833334v4.65849997zm20.1666667 0L17.416667 7.42500033v4.65849997z"></path>
+							<path stroke="{{settings.parkrise_shop_text_color}}" stroke-width="2" d="M4.58333367 7.42500033L.916667 10.08333367V21.0833337h20.1666667V10.08333367L17.416667 7.42500033"></path>
+							<path stroke="{{settings.parkrise_shop_text_color}}" stroke-width="2" d="M4.58333367 12.1000003V.916667H17.416667v11.1833333m-16.5-2.01666663L21.0833337 21.0833337m0-11.00000003L11.0000003 15.5833337"></path>
+							<path d="M8.25000033 5.50000033h5.49999997M8.25000033 9.166667h5.49999997" stroke="{{settings.parkrise_shop_text_color}}" stroke-width="2" stroke-linecap="square"></path>
+						</g>
+					</svg>
+					<a href="mailto:{{ settings.parkrise_email_mb }}" rel="nofollow">{{ settings.parkrise_email_mb }}</a>
+				</div>
+				{%- endif -%}
+			</div>
+		</div>
+	</div>
+	<div class="parkrise-sidebar-overlay"></div>
+</div>

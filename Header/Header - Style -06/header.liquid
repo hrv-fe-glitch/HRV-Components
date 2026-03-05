@@ -1,0 +1,208 @@
+{%comment%}{%- include 'topbar' -%}{%endcomment%}
+{%capture headerStyle%}
+    --header-background-1: rgba(255, 255, 255, 0.7);
+    --header-active-background: rgba(255, 255, 255, 0.96);
+    --header-main-menu-background: ##FFFFFF0F;
+    --header-main-menu-text-color: #000000;
+    --header-main-menu-border-color: rgba(0, 0, 0, 0.12);
+    --header-main-menu-text-color-active: #ffffff;
+    --header-main-menu-text-background-active: #000000;
+    --header-menu-background: rgba(255, 255, 255, 0.96);
+    --header-menu-text-color: #000000;
+    --header-menu-border-color: rgba(0, 0, 0, 0.12);
+    --header-menu-text-background-color-hover: #a7a7a7;
+    --header-menu-dropdown-background: rgba(252, 252, 252, 0.9);
+    --header-menu-dropdown-text-color: #000000;
+    --header-menu-dropdown-border-color: rgba(0, 0, 0, 0.12);
+    --header-menu-dropdown-text-background-color-hover: #a7a7a7;
+    --header-height-sticky: var(--header-height);
+    --header-navigation-item-text-color: var(--header-menu-text-color);
+    --header-navigation-item-border-color: var(--header-menu-border-color);
+    --header-navigation-item-text-background-color-hover: var(--header-menu-text-background-color-hover);
+      --menu-decoration-border-part-color: var(--header-main-menu-text-color);
+    --menu-decoration-border-color: var(--header-main-menu-border-color);
+  --global-border-radius: 40px;
+  {%endcapture%}
+<link rel="preload stylesheet" href="{{ 'header-style.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'header-script.js' | asset_url }}"></script>
+<link rel="preload stylesheet" href="{{ 'header-search.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'header-search.js' | asset_url }}"></script>
+<link rel="preload stylesheet" href="{{ 'header-minicart.scss.css' | asset_url }}" as="stylesheet">
+<script fetchpriority="low" type="text/javascript" defer src="{{ 'header-minicart.js' | asset_url }}"></script>  
+<div class="parkrise-mainHeader--height" style="{{headerStyle-}}">
+	<header class="parkrise-mainHeader">
+    <div class="parkrise-mainHeader-middle">
+			<div class="container-fluid">
+				<div class="parkrise-flex-header">
+					<div class="parkrise-header-left">
+						<div class="parkrise-header-wrap-iconav parkrise-header-wrap-action d-sm-block d-lg-none">
+							<div class="parkrise-header-action">
+								<div class="parkrise-header-action-item parkrise-header-action_menu parkrise-activeMenuChecked">							
+									<div class="parkrise-header-action_text">
+										<a class="parkrise-header-action__link" name="icon-menu-mobile" href="javascript:void(0)" aria-label="Menu" title="Menu">
+											<span class="parkrise-box-icon">								
+												<span class="parkrise-hamburger-menu"  aria-hidden="true">
+													<span class="parkrise-bar"></span>
+												</span>
+												<span class="parkrise-box-icon--close">
+													<svg  viewBox="0 0 19 19" role="presentation"><path d="M9.1923882 8.39339828l7.7781745-7.7781746 1.4142136 1.41421357-7.7781746 7.77817459 7.7781746 7.77817456L16.9705627 19l-7.7781745-7.7781746L1.41421356 19 0 17.5857864l7.7781746-7.77817456L0 2.02943725 1.41421356.61522369 9.1923882 8.39339828z"  fill-rule="evenodd"></path></svg>
+												</span>											
+											</span>	
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+            <div class="parkrise-header-wrap-logo d-sm-block d-lg-none">
+							<div class="parkrise-wrap-logo" itemscope="" itemtype="http://schema.org/Organization">
+								{% if settings.parkrise_use_logo %}
+								<a href="{{shop.url}}"  itemprop="url">
+									<img itemprop="logo" src="{{ 'parkrise_logo.png' | asset_url}}" alt="{{ shop.name }}" class="img-responsive logoimg lazyload"/>
+								</a>
+								{% else %}
+                <a href="{{shop.url}}" itemprop="url"><span class="notranslate">{{ shop.name }}</span></a>
+								{% endif %}
+							</div>
+						</div>
+						<div class="parkrise-header-wrap-menu d-none d-md-none d-lg-block">
+							{%- include 'header-menu' -%}
+						</div>	
+					</div>
+          <div class="parkrise-header-center d-none">
+            <div class="parkrise-header-wrap-logo">
+							<div class="parkrise-wrap-logo" itemscope="" itemtype="http://schema.org/Organization">
+								{% if settings.parkrise_use_logo %}
+								{% if template == 'index' %}
+								<a href="{{shop.url}}"  itemprop="url">
+									<img itemprop="logo" src="{{ 'parkrise_logo.png' | asset_url}}" alt="{{ shop.name }}" class="img-responsive logoimg lazyload"/>
+								</a>			
+								<h1 style="display:none"><a href="{{shop.url}}" itemprop="url"><span class="notranslate">{{ shop.name }}</span></a></h1>
+								{% else %}
+								<a href="{{shop.url}}"  itemprop="url">
+									<img itemprop="logo" src="{{ 'parkrise_logo.png' | asset_url}}" alt="{{ shop.name }}" class="img-responsive logoimg lazyload"/>
+								</a>
+								{% endif %}
+								{% else %}
+								{% if template == 'index' %}	<h1><a href="{{shop.url}}" itemprop="url"><span class="notranslate">{{ shop.name }}</span></a></h1>
+								{% else %}	<a href="{{shop.url}}" itemprop="url"><span class="notranslate">{{ shop.name }}</span></a>{% endif %}
+								{% endif %}
+							</div>
+						</div>
+          </div>
+					<div class="parkrise-header-right">
+						<div class="parkrise-header-wrap-action color-schema-2">
+							<div class="parkrise-header-action">	
+                {%- if settings.show_parkrise_header_hotline -%}
+                <div class="parkrise-header-hotline">
+                  <a href="tel:{{settings.text_parkrise_header_hotline | remove: ' ' | remove: '.'}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-outbound" viewBox="0 0 16 16">
+                      <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877zM11 .5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V1.707l-4.146 4.147a.5.5 0 0 1-.708-.708L14.293 1H11.5a.5.5 0 0 1-.5-.5"/>
+                    </svg>
+                    {{settings.text_parkrise_header_hotline}}
+                  </a>
+                </div>
+                {%- endif -%}
+                {%- if settings.parkrise_shop_google_translate -%}
+                <div class="parkrise-header-action-item parkrise-header-action_translate">
+                  {%- include 'theme_google_translate' -%}
+                </div>
+                {%- endif -%}
+                {%- if settings.show_parkrise_header_search -%}
+								<div class="parkrise-header-action-item parkrise-header-action_search">							
+									<div class="parkrise-header-action_text">
+										<a class="parkrise-header-action__link parkrise-header-action_clicked button-icon-circle"  href="#" id="site-search-handle"  aria-label="Tìm kiếm" title="Tìm kiếm">
+                      <svg version="1.1" class="icon icon-circle-decoration-border" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+                  			<circle fill="none" stroke="currentColor" stroke-width="4" cx="50" cy="50" r="48" stroke-dasharray="360" stroke-linecap="round" transform="rotate(-90 ) translate(-100 0)"></circle>
+                  		</svg>
+                  		<svg class="icon" aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  			<path d="M11.5 20C16.1944 20 20 16.1944 20 11.5C20 6.80558 16.1944 3 11.5 3C6.80558 3 3 6.80558 3 11.5C3 16.1944 6.80558 20 11.5 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  			<path d="M18 18L21 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  		</svg>
+										</a>
+										<span class="parkrise-box-triangle">
+											<svg viewBox="0 0 20 9" role="presentation">
+												<path d="M.47108938 9c.2694725-.26871321.57077721-.56867841.90388257-.89986354C3.12384116 6.36134886 5.74788116 3.76338565 9.2467995.30653888c.4145057-.4095171 1.0844277-.40860098 1.4977971.00205122L19.4935156 9H.47108938z"></path>
+											</svg>
+										</span>
+									</div>
+									<div class="parkrise-header-action_dropdown">
+										<div class="parkrise-header-dropdown_content">
+											<div class="parkrise-sitenav-content parkrise-sitenav-search">
+												<p class="parkrise-boxtitle">Tìm kiếm</p>											
+                        <div class="search-box parkrise-wpo-wrapper-search">
+  												<form action="/search" class="searchform searchform-categoris parkrise-ultimate-search">
+  													<div class="wpo-search-inner">
+  														<input type="hidden" name="type" value="product" />
+  														<input required id="inputSearchAuto" class="input-search" name="q" maxlength="40" autocomplete="off"  type="text" size="20" placeholder="Tìm kiếm sản phẩm...">
+  													</div>
+  													<button type="submit" class="btn-search btn" id="search-header-btn" aria-label="button search">
+  														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                              </svg>
+  													</button>
+  												</form>
+  												<div id="parkrise-ajaxSearchResults" class="parkrise-smart-search-wrapper parkrise-ajaxSearchResults" style="display: none">
+  													<div class="parkrise-resultsContent"></div>
+  												</div>
+  											</div>
+											</div>
+										</div>
+									</div>
+								</div>
+                {%- endif -%}
+								{% if shop.customer_accounts_enabled and settings.show_parkrise_header_account%}
+								<div class="parkrise-header-action-item parkrise-header-action_account d-none d-lg-flex">							
+									<div class="parkrise-header-action_text">
+										<a class="parkrise-header-action__link button-icon-circle"  href="{%- if customer -%}/account{%else%}/account/login{%endif%}" aria-label="Tài khoản" title="Tài khoản">
+                      <svg version="1.1" class="icon icon-circle-decoration-border" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+                        <circle fill="none" stroke="currentColor" stroke-width="4" cx="50" cy="50" r="48" stroke-dasharray="360" stroke-linecap="round" transform="rotate(-90 ) translate(-100 0)"></circle>
+                      </svg>
+                      <svg class="parkrise-svg-ico-account icon" viewBox="0 0 1024 1024" >
+                        <path class="path1" d="M486.4 563.2c-155.275 0-281.6-126.325-281.6-281.6s126.325-281.6 281.6-281.6 281.6 126.325 281.6 281.6-126.325 281.6-281.6 281.6zM486.4 51.2c-127.043 0-230.4 103.357-230.4 230.4s103.357 230.4 230.4 230.4c127.042 0 230.4-103.357 230.4-230.4s-103.358-230.4-230.4-230.4z"></path>
+                        <path class="path2" d="M896 1024h-819.2c-42.347 0-76.8-34.451-76.8-76.8 0-3.485 0.712-86.285 62.72-168.96 36.094-48.126 85.514-86.36 146.883-113.634 74.957-33.314 168.085-50.206 276.797-50.206 108.71 0 201.838 16.893 276.797 50.206 61.37 27.275 110.789 65.507 146.883 113.634 62.008 82.675 62.72 165.475 62.72 168.96 0 42.349-34.451 76.8-76.8 76.8zM486.4 665.6c-178.52 0-310.267 48.789-381 141.093-53.011 69.174-54.195 139.904-54.2 140.61 0 14.013 11.485 25.498 25.6 25.498h819.2c14.115 0 25.6-11.485 25.6-25.6-0.006-0.603-1.189-71.333-54.198-140.507-70.734-92.304-202.483-141.093-381.002-141.093z"></path>
+                      </svg>									
+										</a>
+									</div>
+								</div>
+								{%endif%}
+								{% if settings.shop_buying %}
+								<div class="parkrise-header-action-item parkrise-header-action_cart {% unless template == 'cart'%}{%if settings.promotion_hrvapp_use == 'false'%}parkrise-activeCartChecked{%endif%}{%endunless%} {%unless checkcarticon %}parkrise-show-mb{%endunless%}">							
+									<div class="parkrise-header-action_text">
+										<a style="--button-icon-background-color: #FFFFFF5F;" class="parkrise-header-action__link {% unless template == 'cart'%} {%if settings.promotion_hrvapp_use == 'false'%}parkrise-header-action_clicked{%endif%} {% endunless %}"  href="{% if template == 'cart' or settings.promotion_hrvapp_use%}#{%else%}/cart{%endif%}" aria-label="Giỏ hàng" title="Giỏ hàng">				
+											<span class="">
+                        <svg class="icon" aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M13.7493 8.82789C13.9368 8.93602 14.0618 9.13789 14.0618 9.36914C14.0618 9.71414 13.7806 9.99414 13.4368 9.99414H12.8118C12.4681 9.99414 12.1868 9.71414 12.1868 9.36914C12.1868 9.13789 12.3118 8.93602 12.4993 8.82789V7.49414H7.49933V8.82789C7.68683 8.93602 7.81183 9.13789 7.81183 9.36914C7.81183 9.71414 7.53058 9.99414 7.18683 9.99414H6.56183C6.21808 9.99414 5.93683 9.71414 5.93683 9.36914C5.93683 9.13789 6.06183 8.93602 6.24933 8.82789V7.49414H4.32749L3.4868 18.1191H16.5119L15.6712 7.49414H13.7493V8.82789ZM12.4993 6.24414V4.36914C12.4993 3.70602 12.2368 3.07008 11.7681 2.60133C11.2993 2.13258 10.6618 1.86914 9.99933 1.86914C9.33683 1.86914 8.69936 2.13258 8.23061 2.60133C7.76186 3.07008 7.49933 3.70602 7.49933 4.36914V6.24414H12.4993ZM9.99933 0.619141C9.00558 0.619141 8.04933 1.01414 7.34621 1.71758C6.64308 2.4207 6.24933 3.37445 6.24933 4.36914V6.24414H3.74933C3.42433 6.24414 3.15246 6.49477 3.12746 6.82008L2.18996 18.6951C2.17433 18.8688 2.23372 19.0404 2.35247 19.1682C2.47122 19.2963 2.63683 19.3691 2.81183 19.3691H17.1868C17.3618 19.3691 17.5274 19.2963 17.6462 19.1682C17.7649 19.0404 17.8243 18.8688 17.8087 18.6951L16.8712 6.82008C16.8462 6.49477 16.5743 6.24414 16.2493 6.24414H13.7493V4.36914C13.7493 3.37445 13.3556 2.4207 12.6525 1.71758C11.9493 1.01414 10.9931 0.619141 9.99933 0.619141Z" fill="currentColor"></path>
+                        </svg>
+                        <span class="button-icon__counter header__cart-count js-header-cart-item-count-wrapper parkrise-count-holder" data-cart-count="1">
+                          <span class="js-cart-count">1</span>
+                        </span>
+                      </span>
+										</a>
+										<span class="parkrise-box-triangle">
+											<svg viewBox="0 0 20 9" role="presentation">
+												<path d="M.47108938 9c.2694725-.26871321.57077721-.56867841.90388257-.89986354C3.12384116 6.36134886 5.74788116 3.76338565 9.2467995.30653888c.4145057-.4095171 1.0844277-.40860098 1.4977971.00205122L19.4935156 9H.47108938z" fill="#ffffff"></path>
+											</svg>
+										</span>
+									</div>
+								</div>
+								{% endif %}
+							</div>
+						</div>
+            {%- if settings.show_parkrise_header_booking -%}
+            <div class="parkrise-header-wrap-booking main-button">
+              <button class="main-button-text button button--primary js-btn-modal-booking" type="button" 
+                style="--bg-color: {{settings.parkrise_header_booking_bgcolor}};--text-color: {{settings.parkrise_header_booking_textcolor}};
+                --bg-color--hover: {{settings.parkrise_header_booking_bgcolor_hover}};--text-color--hover: {{settings.parkrise_header_booking_textcolor_hover}};">
+                {{settings.title_parkrise_header_booking}}
+              </button>
+            </div>
+            {%- endif -%}
+					</div>
+				</div>
+			</div>
+    </div>
+	</header>
+</div>
+{%- include 'header-sidebar-main' -%}
+{%- include 'modal-coupon-header' -%}
+
